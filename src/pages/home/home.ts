@@ -16,7 +16,7 @@ num4: number = 1;
   onClick(num: number){
     this.sumOfNum = this.sumOfNum + +num;
     console.log(this.sumOfNum);
-    this.randomNum();
+    this.randomNum(this.num1, this.num2, this.num3);
   }
 
   onSubmit(){
@@ -34,7 +34,7 @@ num4: number = 1;
   resetSum(){
     this.sumOfNum = 0;
     this.topNum = Math.floor(Math.random() * 100) + 1;
-    this.resultOfGame = "Chong";
+
   }
 
   randomNum(num1: number, num2: number, num3: number){
@@ -43,8 +43,8 @@ num4: number = 1;
     this.num3 = this.randombtwn10();
   }
 
-  randombtwn10(num: number){
-    return num = Math.floor(Math.random() * 10) + 1;
+  randombtwn10(){
+    return Math.floor(Math.random() * 10) + 1;
   }
 
 }
