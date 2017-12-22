@@ -7,12 +7,33 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>{{topNum}}</h1>
-  <h2>{{sumOfNum}}</h2>
-  <button ion-button (click)="onClick(num1)">{{num1}}</button>
-  <button ion-button (click)="onClick(num2)">{{num2}}</button>
-  <button ion-button (click)="onClick(num3)">{{num3}}</button>
-  <button ion-button (click)="onClick(num4)">{{num4}}</button>
+  <ion-row>
+    <ion-col col-12>
+      <h1>{{topNum}}</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-12>
+      <h1>{{sumOfNum}}</h1>
+    </ion-col>
+  </ion-row>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-3>
+      <button full large ion-button (click)="onClick(num1)" [disabled]="disableBtnFlag">{{num1}}</button>
+    </ion-col>
+    <ion-col col-3>
+      <button full large ion-button (click)="onClick(num2)" [disabled]="disableBtnFlag">{{num2}}</button>
+    </ion-col>
+    <ion-col col-3>
+      <button full large ion-button (click)="onClick(num3)" [disabled]="disableBtnFlag">{{num3}}</button>
+    </ion-col>
+    <ion-col col-3>
+      <button full large ion-button (click)="onClick(num4)" [disabled]="disableBtnFlag">{{num4}}</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
   <ion-list>
     <button 
@@ -30,6 +51,6 @@
     >Reset
     </button>
   </ion-list>
-  <h1>{{resultOfGame}}</h1>
-  <h1>{{diff}} secs</h1>
+  <h1 *ngIf="showResultFlag">{{resultOfGame}}</h1>
+  <h1 *ngIf="showTimerFlag">{{diff}} secs</h1>
 </ion-content>
