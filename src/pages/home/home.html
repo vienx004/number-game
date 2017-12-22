@@ -1,14 +1,25 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Number-Game
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <h1>{{topNum}}</h1>
+  <h2>{{sumOfNum}}</h2>
+  <button ion-button (click)="onClick(num1)">{{num1}}</button>
+  <button ion-button (click)="onClick(num2)">{{num2}}</button>
+  <button ion-button (click)="onClick(num3)">{{num3}}</button>
+  <button ion-button (click)="onClick(num4)">{{num4}}</button>
+
+  <ion-list>
+    <button 
+    ion-button full 
+    color="secondary"
+    (click)="onSubmit()"
+    >Submit</button>
+  </ion-list>
+
 </ion-content>
