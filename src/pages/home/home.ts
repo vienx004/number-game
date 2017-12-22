@@ -5,12 +5,29 @@ import { Component } from '@angular/core';
   templateUrl: 'home.html'
 })
 export class HomePage {
-sumOfNum: number = 0;
-topNum: number = Math.floor(Math.random() * 100) + 1;
-num1: number = this.randombtwn10();
-num2: number = this.randombtwn10();
-num3: number = this.randombtwn10();
-num4: number = 1;
+sumOfNum: number
+topNum: number
+num1: number
+num2: number
+num3: number
+num4: number
+start: number
+diff: number
+resultOfGame: string
+resetFlag: boolean
+
+ionViewDidLoad(){
+  this.sumOfNum = 0;
+  this.topNum = Math.floor(Math.random() * 100) + 1;
+  this.num1 = this.randombtwn10();
+  this.num2 = this.randombtwn10();
+  this.num3 = this.randombtwn10();
+  this.num4 = 1;
+  this.start = new Date().getTime();
+  this.diff = 0;
+  this.resultOfGame = "";
+  this.resetFlag = false;
+}
 
 //this is a function on event listener click to add to my number
   onClick(num: number){
@@ -22,13 +39,18 @@ num4: number = 1;
   onSubmit(){
     if(this.sumOfNum == this.topNum)
     {
-      console.log("Winner");
-      this.resetSum();
+      this.diff = Math.floor(this.diffTime()/1000);
+      this.resultOfGame = "Winner";
     }else if(this.sumOfNum !== this.topNum){
-      console.log("Loser");
-      alert
-      this.resetSum();
+      this.resultOfGame = "Loser";
     }
+    this.resetFlag = true;
+  }
+
+  onReset(){
+    this.start = this.startTime();
+    this.resetSum();
+    this.resetFlag = false;
   }
 
   resetSum(){
@@ -47,4 +69,18 @@ num4: number = 1;
     return Math.floor(Math.random() * 10) + 1;
   }
 
+  diffTime(){
+    return new Date().getTime() - this.start;
+  }
+
+  startTime(){
+    return new Date().getTime();
+  }
+  
+  isReset(){
+    if(this.resetFlag == false){
+      return false;
+    }
+    return true;
+  }
 }

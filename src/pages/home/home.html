@@ -19,7 +19,17 @@
     ion-button full 
     color="secondary"
     (click)="onSubmit()"
+    *ngIf="!isReset()"
     >Submit</button>
-  </ion-list>
 
+    <button
+    ion-button full
+    color="danger"
+    (click)="onReset()"
+    *ngIf="isReset()"
+    >Reset
+    </button>
+  </ion-list>
+  <h1>{{resultOfGame}}</h1>
+  <h1>{{diff}} secs</h1>
 </ion-content>
