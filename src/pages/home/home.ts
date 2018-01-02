@@ -18,14 +18,17 @@ resetFlag: boolean
 showTimerFlag: boolean
 showResultFlag: boolean
 disableBtnFlag: boolean
+timer: number
+numbers: number[] = [1,1,1,1]
 
 ionViewDidLoad(){
   this.sumOfNum = 0;
   this.topNum = Math.floor(Math.random() * 100) + 1;
-  this.num1 = this.randombtwn10();
-  this.num2 = this.randombtwn10();
-  this.num3 = this.randombtwn10();
-  this.num4 = 1;
+  this.numbers = [1,1,1,1];
+  this.numbers[0] = this.randombtwn10();
+  this.numbers[1] = this.randombtwn10();
+  this.numbers[2] = this.randombtwn10();
+  this.numbers[3] = 1;
   this.start = new Date().getTime();
   this.diff = 0;
   this.resultOfGame = "";
@@ -33,15 +36,18 @@ ionViewDidLoad(){
   this.showTimerFlag = false;
   this.showResultFlag = false;
   this.disableBtnFlag = false;
+  this.randomizeArray(this.numbers);
 }
 
 //this is a function on event listener click to add to my number
   onClick(num: number){
     this.sumOfNum = this.sumOfNum + +num;
     console.log(this.sumOfNum);
-    this.randomNum(this.num1, this.num2, this.num3);
+    this.randomNum();
+    this.randomizeArray(this.numbers);
   }
 
+//this is a function on event listener Submit
   onSubmit(){
     if(this.sumOfNum == this.topNum)
     {
@@ -56,6 +62,7 @@ ionViewDidLoad(){
     this.disableBtnFlag = true;
   }
 
+//Reset all flags and values to default
   onReset(){
     this.start = this.startTime();
     this.resetSum();
@@ -63,24 +70,47 @@ ionViewDidLoad(){
     this.showTimerFlag = false;
     this.showResultFlag = false;
     this.disableBtnFlag = false;
-    this.randomNum(this.num1, this.num2, this.num3);
+    this.randomNum();
+    this.draw();
   }
 
+//Resets the goal number between 1 - 100
   resetSum(){
     this.sumOfNum = 0;
     this.topNum = Math.floor(Math.random() * 100) + 1;
   }
 
-  randomNum(num: number, num2: number, num3: number){
-    this.num1 = this.randombtwn10();
-    this.num2 = this.randombtwn10();
-    this.num3 = this.randombtwn10();
+  isReset(){
+    if(this.resetFlag == false){
+      return false;
+    }
+    return true;
   }
 
-  randombtwn10(){
-    return Math.floor(Math.random() * 10) + 1;
-  }
+//Randomizer Functions////////////////////////////////////////////////
+randomNum(){
+  this.numbers[0] = this.randombtwn10();
+  this.numbers[1] = this.randombtwn10();
+  this.numbers[2] = this.randombtwn10();
+  this.numbers[3] = 1;
+}
 
+randombtwn10(){
+  return Math.floor(Math.random() * 10) + 1;
+}
+
+  //randomize solution array using Fisher-Yates shuffle
+  randomizeArray(solution: number[]){
+    for(let i = solution.length - 1; i > 0; i--){
+      let j = Math.floor(Math.random() * (i+1))
+      let temp = solution[i]
+      solution[i] = solution[j]
+      solution[j] = temp
+    }
+  }
+//////////////////////////////////////////////////////////////////////
+
+  //timer methods////////////////////////////////////////////////////////////
   diffTime(){
     return new Date().getTime() - this.start;
   }
@@ -88,12 +118,12 @@ ionViewDidLoad(){
   startTime(){
     return new Date().getTime();
   }
-  
-  isReset(){
-    if(this.resetFlag == false){
-      return false;
-    }
-    return true;
+  myTimer(){
+    document.getElementById("time").innerHTML = (Math.ceil(((this.start + 10000) - new Date().getTime()) / 1000)).toString();
+  }
+
+  draw(){
+    setInterval(() => {this.myTimer() }, 1000);
   }
 
   isShowTimer(){
@@ -102,4 +132,7 @@ ionViewDidLoad(){
     }
     return true;
   }
+  ///////////////////////////////////////////////////////////////////////////
+
+
 }

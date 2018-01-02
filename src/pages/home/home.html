@@ -21,16 +21,16 @@
 <ion-grid>
   <ion-row>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(num1)" [disabled]="disableBtnFlag">{{num1}}</button>
+      <button full large ion-button (click)="onClick(numbers[0])" [disabled]="disableBtnFlag">{{numbers[0]}}</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(num2)" [disabled]="disableBtnFlag">{{num2}}</button>
+      <button full large ion-button (click)="onClick(numbers[1])" [disabled]="disableBtnFlag">{{numbers[1]}}</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(num3)" [disabled]="disableBtnFlag">{{num3}}</button>
+      <button full large ion-button (click)="onClick(numbers[2])" [disabled]="disableBtnFlag">{{numbers[2]}}</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(num4)" [disabled]="disableBtnFlag">{{num4}}</button>
+      <button full large ion-button (click)="onClick(numbers[3])" [disabled]="disableBtnFlag">{{numbers[3]}}</button>
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -53,4 +53,6 @@
   </ion-list>
   <h1 *ngIf="showResultFlag">{{resultOfGame}}</h1>
   <h1 *ngIf="showTimerFlag">{{diff}} secs</h1>
+  <h1 id="time"></h1>
+  <h2>{{timer}}</h2>
 </ion-content>
