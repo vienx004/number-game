@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-number-game',
+  templateUrl: 'number-game.html'
 })
-export class HomePage {
+export class NumberGamePage {
 sumOfNum: number
 topNum: number
-num1: number
-num2: number
-num3: number
-num4: number
 start: number
 diff: number
 resultOfGame: string
 resetFlag: boolean
-showTimerFlag: boolean
 showResultFlag: boolean
 disableBtnFlag: boolean
+plus5Flag: boolean
 timer: number
 numbers: number[] = [1,1,1,1]
 
@@ -33,10 +29,12 @@ ionViewDidLoad(){
   this.diff = 0;
   this.resultOfGame = "";
   this.resetFlag = false;
-  this.showTimerFlag = false;
   this.showResultFlag = false;
   this.disableBtnFlag = false;
+  this.plus5Flag = false;
   this.randomizeArray(this.numbers);
+  this.timer = 10;
+  this.draw(this.timer, 0);
 }
 
 //this is a function on event listener click to add to my number
@@ -49,11 +47,9 @@ ionViewDidLoad(){
 
 //this is a function on event listener Submit
   onSubmit(){
-    if(this.sumOfNum == this.topNum)
+    if(this.sumOfNum == this.topNum && this.timer != 0)
     {
-      this.diff = Math.floor(this.diffTime()/1000);
       this.resultOfGame = "Winner";
-      this.showTimerFlag = true;
     }else if(this.sumOfNum !== this.topNum){
       this.resultOfGame = "Loser";
     }
@@ -64,14 +60,14 @@ ionViewDidLoad(){
 
 //Reset all flags and values to default
   onReset(){
-    this.start = this.startTime();
     this.resetSum();
     this.resetFlag = false;
-    this.showTimerFlag = false;
     this.showResultFlag = false;
     this.disableBtnFlag = false;
+    this.plus5Flag = false;
     this.randomNum();
-    this.draw();
+    this.timer = 10;
+    this.draw(this.timer, 0);
   }
 
 //Resets the goal number between 1 - 100
@@ -111,28 +107,37 @@ randombtwn10(){
 //////////////////////////////////////////////////////////////////////
 
   //timer methods////////////////////////////////////////////////////////////
-  diffTime(){
-    return new Date().getTime() - this.start;
+  myTimer(timer: number){
+    this.timer = timer;
   }
 
-  startTime(){
-    return new Date().getTime();
-  }
-  myTimer(){
-    document.getElementById("time").innerHTML = (Math.ceil(((this.start + 10000) - new Date().getTime()) / 1000)).toString();
-  }
-
-  draw(){
-    setInterval(() => {this.myTimer() }, 1000);
-  }
-
-  isShowTimer(){
-    if(this.showTimerFlag == false){
-      return false;
-    }
-    return true;
+  draw(timer: number, add: number){
+    var intervalID = setInterval(() =>
+    {this.myTimer(timer + add); timer--; 
+      if(timer < 0){
+        clearInterval(intervalID)
+      } else if(this.showResultFlag == true){
+        clearInterval(intervalID)
+          if(this.timer != 10){
+            this.timer++;
+          }
+      }
+    }, 1000);
   }
   ///////////////////////////////////////////////////////////////////////////
 
+  //Perks functions///////////////////////////////////////////////
+  onPlus5Click(){
+
+  }
+
+  onMinus10Click(){
+    this.sumOfNum = this.sumOfNum - 10;
+  }
+
+  onExactClick(){
+    this.sumOfNum = this.topNum;
+  }
+  ////////////////////////////////////////////////////////////////
 
 }

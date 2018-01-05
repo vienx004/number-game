@@ -1,15 +1,23 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Number-Game
-    </ion-title>
+      <ion-title>Number-Game</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-row>
+    <ion-col col-6>
+      <h3 class="score">Score: </h3>
+    </ion-col>
+
+    <ion-col col-6>
+      <h3 class="timer">Timer: {{timer}}</h3>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row>
     <ion-col col-12>
-      <h1>{{topNum}}</h1>
+      <h1 class="top-number">{{topNum}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -35,6 +43,20 @@
   </ion-row>
 </ion-grid>
 
+<ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <button full large ion-button (click)="onPlus5Click(timer)" [disabled]="disableBtnFlag">+5 secs</button>
+      </ion-col>
+      <ion-col col-4>
+        <button full large ion-button (click)="onMinus10Click()" [disabled]="disableBtnFlag">-10</button>
+      </ion-col>
+      <ion-col col-4>
+        <button full large ion-button (click)="onExactClick()" [disabled]="disableBtnFlag">Exact</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-list>
     <button 
     ion-button full 
@@ -52,7 +74,4 @@
     </button>
   </ion-list>
   <h1 *ngIf="showResultFlag">{{resultOfGame}}</h1>
-  <h1 *ngIf="showTimerFlag">{{diff}} secs</h1>
-  <h1 id="time"></h1>
-  <h2>{{timer}}</h2>
 </ion-content>
