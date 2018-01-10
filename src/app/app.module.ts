@@ -1,3 +1,4 @@
+import { HomePage } from './../pages/home/home';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -10,7 +11,8 @@ import { NumberGamePage } from '../pages/number-game/number-game';
 @NgModule({
   declarations: [
     MyApp,
-    NumberGamePage
+    NumberGamePage,
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,8 @@ import { NumberGamePage } from '../pages/number-game/number-game';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    NumberGamePage
+    NumberGamePage,
+    HomePage
   ],
   providers: [
     StatusBar,
