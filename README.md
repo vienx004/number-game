@@ -2,7 +2,8 @@
 
 Pull/Download project
 
-(Just in case run cmd as administrator):
+(Just in case run cmd as administrator)
+
 To install:
 npm install
 
