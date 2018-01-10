@@ -50,7 +50,7 @@ ionViewDidLoad(){
     if(this.sumOfNum == this.topNum && this.timer != 0)
     {
       this.resultOfGame = "Winner";
-    }else if(this.sumOfNum !== this.topNum){
+    }else if(this.sumOfNum !== this.topNum || this.timer == 0){
       this.resultOfGame = "Loser";
     }
     this.resetFlag = true;
