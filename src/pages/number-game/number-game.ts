@@ -17,9 +17,12 @@ plus5Flag: boolean
 timer: number
 numbers: number[] = [1,1,1,1]
 
+recipe: number[] = [1,1,1,1]
+userRecipe: any
+
 ionViewDidLoad(){
   this.sumOfNum = 0;
-  this.topNum = Math.floor(Math.random() * 100) + 1;
+  //this.topNum = Math.floor(Math.random() * 100) + 1;
   this.numbers = [1,1,1,1];
   this.numbers[0] = this.randombtwn10();
   this.numbers[1] = this.randombtwn10();
@@ -32,48 +35,75 @@ ionViewDidLoad(){
   this.showResultFlag = false;
   this.disableBtnFlag = false;
   this.plus5Flag = false;
-  this.randomizeArray(this.numbers);
   this.timer = 10;
   this.draw(this.timer, 0);
+
+  this.recipe = [0,0,0,0];
+  this.resetRecipe();
+  this.userRecipe = [0,0,0,0];
 }
 
-//this is a function on event listener click to add to my number
-  onClick(num: number){
-    this.sumOfNum = this.sumOfNum + +num;
-    console.log(this.sumOfNum);
-    this.randomNum();
-    this.randomizeArray(this.numbers);
+//this is a function on event listener click to +1 an ingredient
+  onClick1(){
+    this.userRecipe[0]++;
+    //console.log(this.userRecipe);
+  }
+  onClick2(){
+    this.userRecipe[1]++;
+    //console.log(this.userRecipe);
+  }
+  onClick3(){
+    this.userRecipe[2]++;
+    //console.log(this.userRecipe);
+  }
+  onClick4(){
+    this.userRecipe[3]++;
+    //console.log(this.userRecipe);
   }
 
 //this is a function on event listener Submit
   onSubmit(){
-    if(this.sumOfNum == this.topNum && this.timer != 0)
-    {
-      this.resultOfGame = "Winner";
-    }else if(this.sumOfNum !== this.topNum || this.timer == 0){
-      this.resultOfGame = "Loser";
+    if(this.checkRecipes(this.userRecipe, this.recipe) == true){
+      this.resultOfGame = "Correct";
+    }else if(this.userRecipe !== this.recipe || this.timer == 0){
+      this.resultOfGame = "Incorrect";
     }
-    this.resetFlag = true;
-    this.showResultFlag = true;
-    this.disableBtnFlag = true;
+      this.resetFlag = true;
+      this.showResultFlag = true;
+      this.disableBtnFlag = true;
+  }
+
+  checkRecipes(userRecipe: number[], recipe: number[]){
+    if(userRecipe.length !== recipe.length){
+      return false;
+    }
+    for(let i = 0; i < 3; i++){
+      if(userRecipe[i] !== recipe[i]){
+        return false;
+      }
+      return true;
+    }
   }
 
 //Reset all flags and values to default
   onReset(){
-    this.resetSum();
+    //this.resetSum();
     this.resetFlag = false;
     this.showResultFlag = false;
     this.disableBtnFlag = false;
     this.plus5Flag = false;
-    this.randomNum();
+    this.resetUserRecipe();
+    this.resetRecipe();
     this.timer = 10;
     this.draw(this.timer, 0);
   }
 
-//Resets the goal number between 1 - 100
-  resetSum(){
-    this.sumOfNum = 0;
-    this.topNum = Math.floor(Math.random() * 100) + 1;
+//Resets recipe array
+  resetRecipe(){
+    for(let i = 0; i < this.recipe.length; i++){
+        this.recipe[i] = Math.floor(Math.random() * 10) + 1;
+        console.log
+    }
   }
 
   isReset(){
@@ -84,26 +114,14 @@ ionViewDidLoad(){
   }
 
 //Randomizer Functions////////////////////////////////////////////////
-randomNum(){
-  this.numbers[0] = this.randombtwn10();
-  this.numbers[1] = this.randombtwn10();
-  this.numbers[2] = this.randombtwn10();
-  this.numbers[3] = 1;
+resetUserRecipe(){
+  this.userRecipe = [0,0,0,0]
 }
 
 randombtwn10(){
   return Math.floor(Math.random() * 10) + 1;
 }
 
-  //randomize solution array using Fisher-Yates shuffle
-  randomizeArray(solution: number[]){
-    for(let i = solution.length - 1; i > 0; i--){
-      let j = Math.floor(Math.random() * (i+1))
-      let temp = solution[i]
-      solution[i] = solution[j]
-      solution[j] = temp
-    }
-  }
 //////////////////////////////////////////////////////////////////////
 
   //timer methods////////////////////////////////////////////////////////////

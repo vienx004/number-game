@@ -10,29 +10,33 @@
   </ion-row>
   
   <ion-row>
-    <ion-col col-12>
-      <h1 class="top-number">{{topNum}}</h1>
+    <ion-col *ngFor="let ingredient of recipe">
+      <h1 class="top-number">{{ingredient}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col col-12>
-      <h1>{{sumOfNum}}</h1>
+    <ion-col *ngFor="let ingredient of userRecipe">
+      <h1>{{ingredient}}</h1>
     </ion-col>
   </ion-row>
 
 <ion-grid>
   <ion-row>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(numbers[0])" [disabled]="disableBtnFlag">{{numbers[0]}}</button>
+      <!--button full large ion-button (click)="onClick(numbers[0])" [disabled]="disableBtnFlag">{{numbers[0]}}</button-->
+      <button full large ion-button (click)="onClick1()">Potato</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(numbers[1])" [disabled]="disableBtnFlag">{{numbers[1]}}</button>
+      <!--button full large ion-button (click)="onClick(numbers[1])" [disabled]="disableBtnFlag">{{numbers[1]}}</button-->
+      <button full large ion-button (click)="onClick2()">Carrot</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(numbers[2])" [disabled]="disableBtnFlag">{{numbers[2]}}</button>
+      <!--button full large ion-button (click)="onClick(numbers[2])" [disabled]="disableBtnFlag">{{numbers[2]}}</button-->
+      <button full large ion-button (click)="onClick3()">Tomato</button>
     </ion-col>
     <ion-col col-3>
-      <button full large ion-button (click)="onClick(numbers[3])" [disabled]="disableBtnFlag">{{numbers[3]}}</button>
+      <!--button full large ion-button (click)="onClick(numbers[3])" [disabled]="disableBtnFlag">{{numbers[3]}}</button-->
+      <button full large ion-button (click)="onClick4()">Onion</button>
     </ion-col>
   </ion-row>
 </ion-grid>
